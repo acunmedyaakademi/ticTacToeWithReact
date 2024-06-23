@@ -1,13 +1,20 @@
 import { useContext, useState } from "react"
 import { userContext } from "../App"
-const box = { display: "grid", gridTemplateColumns: "auto auto auto", gap: "20px" }
+const box = {
+    display: "grid",
+    gridTemplateColumns: "auto auto auto",
+    gap: "10px 5px"
+}
 const tileStyle = {
-    backgroundColor: "pink",
     boxShadow: "2px 2px 4px blue, 5px 5px 8px red, 5px 8px 8px green",
-    padding: "20px",
     borderRadius: "3px",
-    textAlign: "center",
-    fontSize: "24px"
+    backgroundColor: "pink",
+    width: "50px",
+    height: "50px",
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+
 };
 
 export const Box = () => {
@@ -18,7 +25,11 @@ export const Box = () => {
     console.log(sayi);
 
     const handleClickTile = (param) => {
-        // setSayi([...,param])
+
+
+        sayi[param] = nextPlayer
+        console.log(nextPlayer);
+        setSayi(sayi)
         setNextPlayer(nextPlayer === "X" ? "O" : "X");
 
     }
