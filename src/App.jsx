@@ -10,19 +10,11 @@ export const userContext = createContext()
 function App() {
   const [nextPlayer, setNextPlayer] = useState("X")
   const [nextPlayer2, setNextPlayer2] = useState("O")
-
   const [hasWinner, setHasWinner] = useState(false)
-  const [sayi, setSayi] = useState()
-
-  const element = () => {
-    setSayi(sayi + 1)
-    console.log(sayi);
-  }
-
 
 
   return (
-    <userContext.Provider value={{ nextPlayer, hasWinner, setNextPlayer }}>
+    <userContext.Provider value={{ nextPlayer, hasWinner, setNextPlayer, setHasWinner }}>
 
       <Header />
       <Box />

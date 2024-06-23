@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { userContext } from "../App"
 const box = {
     display: "grid",
@@ -19,16 +19,39 @@ const tileStyle = {
 
 export const Box = () => {
 
-    const { nextPlayer, hasWinner, setNextPlayer } = useContext(userContext)
+    const { nextPlayer, hasWinner, setHasWinner, setNextPlayer } = useContext(userContext)
     const [sayi, setSayi] = useState(Array(9).fill(null))
 
-    console.log(sayi);
+    const WINNING_CONDITIONS = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [2, 4, 6],
+        [0, 4, 8]
+    ]
+
+    useEffect(() => checkWinner(), [nextPlayer])
+
+    const checkWinner = () => {
+        WINNING_CONDITIONS.map(element => {
+            const [a, b, c] = element
+            if (sayi[a] && sayi[a] === sayi[b] && sayi[a] === sayi[c]) {
+                setHasWinner(true)
+            }
+
+        })
+    }
 
     const handleClickTile = (param) => {
 
-        sayi[param] = nextPlayer
+        if (sayi[param] === null) {
 
-        setNextPlayer(nextPlayer === "X" ? "O" : "X");
+            sayi[param] = nextPlayer
+            setNextPlayer(nextPlayer === "X" ? "O" : "X");
+        }
 
     }
 
