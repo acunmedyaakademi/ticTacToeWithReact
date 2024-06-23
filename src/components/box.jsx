@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react"
+import { useCallback, useContext, useEffect, useState } from "react"
 import { userContext } from "../App"
 const box = {
     display: "grid",
@@ -33,19 +33,34 @@ export const Box = () => {
         [0, 4, 8]
     ]
 
-    useEffect(() => checkWinner(), [nextPlayer])
+    useEffect(() => {
+        checkWinner()
 
-    const checkWinner = () => {
+    }, [nextPlayer])
+
+    const checkWinner = useCallback(() => {
         WINNING_CONDITIONS.map(element => {
             const [a, b, c] = element
             if (sayi[a] && sayi[a] === sayi[b] && sayi[a] === sayi[c]) {
+
+                setTimeout(() => {
+                    if (confirm("TEBRİKLER KAZANDINIZ, YENİDEN BAŞLAMAK İSTERMİSİNİZ"))
+                        setSayi(Array(9).fill(null))
+                    setHasWinner(false)
+                    setNextPlayer("X")
+
+
+                }, 200)
                 setHasWinner(true)
             }
 
         })
-    }
+    }, [nextPlayer])
 
     const handleClickTile = (param) => {
+        if (hasWinner) {
+            return;
+        }
 
         if (sayi[param] === null) {
 

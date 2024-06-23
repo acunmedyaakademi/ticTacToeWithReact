@@ -8,7 +8,7 @@ export const Header = () => {
         <>
             <h2>Tic Tac Toe</h2>
             <span>{`Nex Player: ${nextPlayer}`}</span>
-            <h5>{`Winner: ${hasWinner}`} </h5>
+            <h5>{`Winner: ${hasWinner && nextPlayer === "O" ? "X" : hasWinner ? "O" : ""}`} </h5>
         </>
     )
 }
