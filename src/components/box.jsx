@@ -26,10 +26,8 @@ export const Box = () => {
 
     const handleClickTile = (param) => {
 
-
         sayi[param] = nextPlayer
-        console.log(nextPlayer);
-        setSayi(sayi)
+
         setNextPlayer(nextPlayer === "X" ? "O" : "X");
 
     }
