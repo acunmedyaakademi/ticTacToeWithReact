@@ -22,6 +22,13 @@ export const Box = () => {
     const { nextPlayer, hasWinner, setHasWinner, setNextPlayer } = useContext(userContext)
     const [sayi, setSayi] = useState(Array(9).fill(null))
 
+    const resetTile = () => {
+
+        setSayi(Array(9).fill(null))
+        setHasWinner(false)
+        setNextPlayer("X")
+    }
+
     const WINNING_CONDITIONS = [
         [0, 1, 2],
         [3, 4, 5],
@@ -44,11 +51,9 @@ export const Box = () => {
             if (sayi[a] && sayi[a] === sayi[b] && sayi[a] === sayi[c]) {
 
                 setTimeout(() => {
-                    if (confirm("TEBRİKLER KAZANDINIZ, YENİDEN BAŞLAMAK İSTERMİSİNİZ"))
-                        setSayi(Array(9).fill(null))
-                    setHasWinner(false)
-                    setNextPlayer("X")
-
+                    if (confirm("TEBRİKLER KAZANDINIZ, YENİDEN BAŞLAMAK İSTERMİSİNİZ")) {
+                        resetTile()
+                    }
 
                 }, 200)
                 setHasWinner(true)
@@ -83,6 +88,8 @@ export const Box = () => {
                 })}
 
             </div >
+            <button style={{ marginTop: "15px" }} onClick={resetTile}>RESET</button>
+
         </>
     )
 }
